@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>숫자 야구 게임</title>
+    <style>
+        .container {
+            width: 500px;
+            margin: 0 auto;
+        }
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 50px;
+        }
+        input[type="number"] {
+            margin-bottom: 20px;
+        }
+        .history {
+            margin-top: 40px;
+        }
+        .history-item {
+            margin-bottom: 10px;
+        }
+    </style>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var win = [[${win}]];
+        if (win) {
+            alert("축하합니다! 정답을 맞추셨습니다.");
+        }
+        /*]]>*/
+    </script>
+</head>
+<body>
+<div class="container">
+    <h1 align="center">숫자 야구 게임</h1>
+    <form action="#" th:action="@{/guess}" method="post">
+        <input type="number" th:name="guess" placeholder="숫자를 입력하세요" required>
+        <button type="submit">제출</button>
+    </form>
+    <form action="#" th:action="@{/reset}" method="post">
+        <button type="submit">다시 시작</button>
+    </form>
+    <div class="history" th:each="item : ${history}">
+        <div class="history-item">
+            <p>입력한 숫자: <span th:text="${item.guess}"/></p>
+            <p>결과: <span th:text="${item.result}"/></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
